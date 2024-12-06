@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
+import { notifyError, notifySuccess } from "../util/Util";
 
 export default function FormOrientadores() {
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   const [idOrientador, setIdOrientador] = useState();
   const [nome, setNome] = useState("");
@@ -21,7 +23,7 @@ export default function FormOrientadores() {
           setDepartamento(response.data.departamento);
         })
         .catch((error) => {
-          console.error("Erro ao carregar os dados do orientador:", error);
+          notifyError("Erro ao carregar os dados do orientador.");
         });
     }
   }, [state]);
@@ -35,22 +37,32 @@ export default function FormOrientadores() {
     if (idOrientador != null) {
       // Alteração
       axios
-        .put("http://localhost:8080/api/orientadores/" + idOrientador, orientadorRequest)
+        .patch("http://localhost:8080/api/orientadores/" + idOrientador, orientadorRequest)
         .then(() => {
-          console.log("Orientador alterado com sucesso.");
+          notifySuccess("Orientador alterado com sucesso.");
+          navigate(`/list-orientadores`); // Redireciona para a lista de orientadores
         })
         .catch((error) => {
-          console.error("Erro ao alterar o orientador:", error);
+          if (error.response) {
+            notifyError(error.response.data.message);
+          } else {
+            notifyError("Erro ao alterar o orientador.");
+          }
         });
     } else {
       // Cadastro
       axios
         .post("http://localhost:8080/api/orientadores", orientadorRequest)
         .then(() => {
-          console.log("Orientador cadastrado com sucesso.");
+          notifySuccess("Orientador cadastrado com sucesso.");
+          navigate(`/list-orientadores`); // Redireciona para a lista de orientadores
         })
         .catch((error) => {
-          console.error("Erro ao cadastrar o orientador:", error);
+          if (error.response) {
+            notifyError(error.response.data.message);
+          } else {
+            notifyError("Erro ao cadastrar o orientador.");
+          }
         });
     }
   }

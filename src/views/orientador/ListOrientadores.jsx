@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
+import { notifyError, notifySuccess } from "../util/Util";
 
 export default function ListOrientadores() {
   const [lista, setLista] = useState([]);
@@ -34,14 +35,19 @@ export default function ListOrientadores() {
       .delete("http://localhost:8080/api/orientadores/" + idRemover)
       .then(() => {
         setOpenModal(false);
-        console.log("Orientador removido com sucesso.");
+        notifySuccess("Orientador removido com sucesso."); // Exibe mensagem de sucesso
         carregarLista(); // Recarrega a lista após a exclusão
       })
       .catch((error) => {
         setOpenModal(false);
-        console.error("Erro ao remover o orientador:", error);
+        if (error.response) {
+          notifyError(error.response.data.message); // Mostra o erro retornado pelo backend
+        } else {
+          notifyError("Erro ao remover o orientador."); // Mensagem genérica em caso de erro
+        }
       });
   }
+
 
   return (
     <div>

@@ -37,7 +37,7 @@ export default function FormAgentes() {
     if (idAgente != null) {
       // Alteração
       axios
-        .put("http://localhost:8080/api/agentes-integracao/" + idAgente, agenteRequest)
+        .patch("http://localhost:8080/api/agentes-integracao/" + idAgente, agenteRequest)
         .then(() => {
           notifySuccess("Agente de integração alterado com sucesso.");
           navigate(`/list-agentes`);

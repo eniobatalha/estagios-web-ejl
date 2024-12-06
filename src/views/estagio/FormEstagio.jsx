@@ -89,10 +89,14 @@ export default function FormEstagios() {
       idAgenteIntegracao: idAgente,
     };
 
+
+    // Log para verificar o payload
+    console.log("Payload enviado:", estagioRequest);
+
     if (idEstagio != null) {
       // Alteração
       axios
-        .put("http://localhost:8080/api/estagios/" + idEstagio, estagioRequest)
+        .patch("http://localhost:8080/api/estagios/" + idEstagio, estagioRequest)
         .then(() => {
           notifySuccess("Estágio alterado com sucesso.");
           navigate(`/list-estagios`);
@@ -209,8 +213,11 @@ export default function FormEstagios() {
                 <Form.Select
                   fluid
                   label="Agente de Integração"
-                  placeholder="Selecione um agente"
-                  options={listaAgentes}
+                  placeholder="Selecione um agente (opcional)"
+                  options={[
+                    { text: "Nenhum", value: null }, // Opção para nenhum agente
+                    ...listaAgentes, // Outras opções carregadas dinamicamente
+                  ]}
                   value={idAgente}
                   onChange={(e, { value }) => setIdAgente(value)}
                 />

@@ -47,7 +47,7 @@ export default function FormEmpresas() {
     if (idEmpresa != null) {
       // Alteração
       axios
-        .put("http://localhost:8080/api/empresas-concedentes/" + idEmpresa, empresaRequest)
+        .patch("http://localhost:8080/api/empresas-concedentes/" + idEmpresa, empresaRequest)
         .then(() => {
           notifySuccess("Empresa concedente alterada com sucesso.");
           navigate(`/list-empresas`);
