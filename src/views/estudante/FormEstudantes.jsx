@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import InputMask from "react-input-mask";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
@@ -17,7 +16,7 @@ export default function FormEstudantes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (state != null && state.id != null) {
+    if (state !== null && state.id !== null) {
       axios
         .get("http://localhost:8080/api/estudantes/" + state.id)
         .then((response) => {
@@ -39,7 +38,7 @@ export default function FormEstudantes() {
       curso: curso,
     };
 
-    if (idEstudante != null) {
+    if (idEstudante !== null) {
       // Alteração:
       axios
         .patch("http://localhost:8080/api/estudantes/" + idEstudante, estudanteRequest)
@@ -87,7 +86,7 @@ export default function FormEstudantes() {
               Cadastro
             </h2>
           )}
-          {idEstudante != undefined && (
+          {idEstudante !== undefined && (
             <h2>
               <span style={{ color: "darkgray" }}>
                 Estudante &nbsp;

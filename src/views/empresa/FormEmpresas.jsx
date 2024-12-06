@@ -131,39 +131,6 @@ export default function FormEmpresas() {
                 </Form.Input>
               </Form.Group>
 
-              <Form.Group widths="equal">
-                <Form.Input
-                  required
-                  fluid
-                  label="Endereço"
-                  value={endereco}
-                  onChange={(e) => setEndereco(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Input
-                  required
-                  fluid
-                  label="Email"
-                  width={10}
-                  maxLength="100"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <Form.Input
-                  fluid
-                  label="Telefone"
-                  width={6}
-                >
-                  <InputMask
-                    mask="(99) 99999-9999"
-                    value={telefone}
-                    onChange={(e) => setTelefone(e.target.value)}
-                  />
-                </Form.Input>
-              </Form.Group>
             </Form>
 
             <div style={{ marginTop: "4%" }}>

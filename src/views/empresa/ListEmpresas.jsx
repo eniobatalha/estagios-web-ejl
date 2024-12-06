@@ -75,9 +75,6 @@ export default function ListEmpresas() {
                 <Table.Row>
                   <Table.HeaderCell>Nome</Table.HeaderCell>
                   <Table.HeaderCell>CNPJ</Table.HeaderCell>
-                  <Table.HeaderCell>Endereço</Table.HeaderCell>
-                  <Table.HeaderCell>Email</Table.HeaderCell>
-                  <Table.HeaderCell>Telefone</Table.HeaderCell>
                   <Table.HeaderCell textAlign="center">Ações</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
@@ -87,9 +84,6 @@ export default function ListEmpresas() {
                   <Table.Row key={empresa.id}>
                     <Table.Cell>{empresa.nome}</Table.Cell>
                     <Table.Cell>{empresa.cnpj}</Table.Cell>
-                    <Table.Cell>{empresa.endereco}</Table.Cell>
-                    <Table.Cell>{empresa.email}</Table.Cell>
-                    <Table.Cell>{empresa.telefone}</Table.Cell>
                     <Table.Cell textAlign="center">
                       <Button
                         inverted
